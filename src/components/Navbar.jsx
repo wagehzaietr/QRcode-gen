@@ -11,16 +11,16 @@ export default function Navbar({ darkMode, toggleDarkMode }) {
   ];
   return (
     <nav className="w-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur border-b border-zinc-200 dark:border-zinc-800 px-4 py-2 flex items-center justify-between sticky top-0 z-50">
-      <Link to="/" className="flex items-center gap-2 text-xl font-bold text-primary dark:text-white">
-        <img src="/logo1.jpg" alt="Logo" className="w-8 h-8 rounded" loading="lazy" />
+      <Link to="/" className="flex items-center gap-2 text-lg md:text-xl font-bold text-primary dark:text-white">
+        <img src="/logo1.jpg" alt="Logo" className="w-7 h-7 md:w-8 md:h-8 rounded" loading="lazy" />
         RapidQR
       </Link>
-      <div className="flex items-center gap-6">
+      <div className="flex items-center gap-4 md:gap-6">
         {navLinks.map(link => (
           <Link
             key={link.to}
             to={link.to}
-            className={`text-base font-medium transition-colors ${location.pathname === link.to ? "text-primary dark:text-white" : "text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white"}`}
+            className={`text-sm md:text-base font-medium transition-colors ${location.pathname === link.to ? "text-primary dark:text-white" : "text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white"}`}
           >
             {link.label}
           </Link>
