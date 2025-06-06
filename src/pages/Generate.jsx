@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import ScanMeBadge from "@/components/ScanMeBadge";
-import { Helmet } from "react-helmet-async";
 
 const CONTENT_TYPES = [
   { value: "url", label: "URL" },
@@ -211,68 +210,57 @@ export default function Generate({ darkMode }) {
   const qrValue = getQRValue();
 
   return (
-    <>
-      <Helmet>
-        <title>Generate QR Code for Any Content | RapidQR</title>
-        <meta name="description" content="Generate a free QR code for any content: URL, email, phone, text, location, event, or WiFi. Download, customize, and share instantly. No sign-up required." />
-        <meta property="og:title" content="Generate QR Code for Any Content | RapidQR" />
-        <meta property="og:description" content="Generate a free QR code for any content: URL, email, phone, text, location, event, or WiFi. Download, customize, and share instantly. No sign-up required." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://yourdomain.com/generate" />
-        <meta property="og:image" content="/logo1.jpg" />
-      </Helmet>
-      <section className="min-h-[80vh] flex flex-col items-center justify-center px-4 py-12">
-        <div className="bg-white dark:bg-zinc-800 p-8 rounded-2xl shadow-2xl w-full max-w-xl transition-all duration-300">
-          <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-6 text-center">QR Code Generator</h1>
-          <div className="mb-4">
-            <label htmlFor="contentType" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Content Type</label>
-            <select
-              id="contentType"
-              value={contentType}
-              onChange={handleTypeChange}
-              className="w-full rounded-md border border-input bg-transparent px-3 py-2 text-base shadow-xs focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] mb-2 text-gray-900 dark:text-white dark:bg-zinc-800"
-            >
-              {CONTENT_TYPES.map((type) => (
-                <option key={type.value} value={type.value}>{type.label}</option>
-              ))}
-            </select>
-          </div>
-          {renderFields()}
-          <AnimatePresence>
-            {valid && qrValue && (
-              <motion.div
-                className="flex flex-col items-center space-y-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div
-                  ref={qrRef}
-                  className="bg-white dark:bg-zinc-700 p-4 rounded-lg shadow relative"
-                >
-                  <QRCodeCanvas value={qrValue} size={200} />
-                  <ScanMeBadge />
-                </div>
-                <div className="flex gap-4">
-                  <Button onClick={downloadQR}>
-                    <Download className="w-4 h-4 mr-2" /> Download
-                  </Button>
-                  <Button
-                    variant="secondary"
-                    onClick={() => navigator.clipboard.writeText(qrValue)}
-                  >
-                    <Link2 className="w-4 h-4 mr-2" /> Copy Content
-                  </Button>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-          {!valid && qrValue && (
-            <p className="text-red-500 mt-4 text-sm">Please fill all required fields for this content type.</p>
-          )}
+    <section className="min-h-[80vh] flex flex-col items-center justify-center px-4 py-12">
+      <div className="bg-white dark:bg-zinc-800 p-8 rounded-2xl shadow-2xl w-full max-w-xl transition-all duration-300">
+        <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-6 text-center">QR Code Generator</h1>
+        <div className="mb-4">
+          <label htmlFor="contentType" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Content Type</label>
+          <select
+            id="contentType"
+            value={contentType}
+            onChange={handleTypeChange}
+            className="w-full rounded-md border border-input bg-transparent px-3 py-2 text-base shadow-xs focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] mb-2 text-gray-900 dark:text-white dark:bg-zinc-800"
+          >
+            {CONTENT_TYPES.map((type) => (
+              <option key={type.value} value={type.value}>{type.label}</option>
+            ))}
+          </select>
         </div>
-      </section>
-    </>
+        {renderFields()}
+        <AnimatePresence>
+          {valid && qrValue && (
+            <motion.div
+              className="flex flex-col items-center space-y-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div
+                ref={qrRef}
+                className="bg-white dark:bg-zinc-700 p-4 rounded-lg shadow relative"
+              >
+                <QRCodeCanvas value={qrValue} size={200} />
+                <ScanMeBadge />
+              </div>
+              <div className="flex gap-4">
+                <Button onClick={downloadQR}>
+                  <Download className="w-4 h-4 mr-2" /> Download
+                </Button>
+                <Button
+                  variant="secondary"
+                  onClick={() => navigator.clipboard.writeText(qrValue)}
+                >
+                  <Link2 className="w-4 h-4 mr-2" /> Copy Content
+                </Button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        {!valid && qrValue && (
+          <p className="text-red-500 mt-4 text-sm">Please fill all required fields for this content type.</p>
+        )}
+      </div>
+    </section>
   );
 } 

@@ -1,18 +1,8 @@
 import React from "react";
-import { Helmet } from "react-helmet-async";
 
 export default function About() {
   return (
     <>
-      <Helmet>
-        <title>About RapidQR | Free QR Code Generator</title>
-        <meta name="description" content="Learn about RapidQR, a free and modern QR code generator for business, events, and personal use. No sign-up required." />
-        <meta property="og:title" content="About RapidQR | Free QR Code Generator" />
-        <meta property="og:description" content="Learn about RapidQR, a free and modern QR code generator for business, events, and personal use. No sign-up required." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://yourdomain.com/about" />
-        <meta property="og:image" content="/logo1.jpg" />
-      </Helmet>
       <section className="max-w-2xl mx-auto py-16 px-4">
         <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">About RapidQR</h2>
         <p className="mb-6 text-gray-700 dark:text-gray-300">
